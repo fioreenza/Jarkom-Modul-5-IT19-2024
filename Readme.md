@@ -390,16 +390,52 @@ service apache2 restart
 ## MISI 2
 
 ### NO 1
+1. Jalankan script berikut pada NewEridu
+   ```
+   ETH0_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+   iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
+   ```
+2. Ping google.com untuk mengecek
+   ![image](https://github.com/user-attachments/assets/47bdab65-f0b1-418c-bb48-2caf45012d70)
+
+
+### NO 2
 1. Awalnya HIA dan fairy saling bisa ping
-![image](https://github.com/user-attachments/assets/91874200-c9d1-445f-80a1-7d3b7da871f6)
-![image](https://github.com/user-attachments/assets/8bb6544e-8673-421c-a819-59a1b08a6f58)
-2. Jalankan command iptables -L INPUT -n --line-numbers
-![image](https://github.com/user-attachments/assets/866c80ad-2533-4b32-a3a2-b297be51e210)
-3. Jalankan command iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
-![image](https://github.com/user-attachments/assets/bed08d40-244b-4136-9a39-1e67b18dad05)
+   ![image](https://github.com/user-attachments/assets/91874200-c9d1-445f-80a1-7d3b7da871f6)
+   ![image](https://github.com/user-attachments/assets/8bb6544e-8673-421c-a819-59a1b08a6f58)
+2. Jalankan command berikut agar tidak ada perangkat yang bisa ping fairy
+   ```
+   iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
+   ```
+   ![image](https://github.com/user-attachments/assets/bed08d40-244b-4136-9a39-1e67b18dad05)
 4. Fairy bisa ping HIA tetapi HIA tidak bisa ping fairy
-![image](https://github.com/user-attachments/assets/924c108f-bee7-4794-9a43-bbb0dbcc025e)
-![image](https://github.com/user-attachments/assets/de5769b5-b8cb-4323-87f0-c7dd976c5ef2)
+   ![image](https://github.com/user-attachments/assets/924c108f-bee7-4794-9a43-bbb0dbcc025e)
+   ![image](https://github.com/user-attachments/assets/de5769b5-b8cb-4323-87f0-c7dd976c5ef2)
+
+
+### NO 3 
+1. Jalankan script pada DHCP server HDD agar hanya Fairy yang dapat mengakses HDD
+   ```
+   iptables -A INPUT -s 10.73.2.11 -j ACCEPT
+   iptables -A INPUT -j DROP
+   ```
+   ![image](https://github.com/user-attachments/assets/cfeefced-bcc9-4b7c-bc46-98ce1fb3cd12)
+2. Fairy bisa ping HDD namun perangkat lain tidak bisa
+   ![image](https://github.com/user-attachments/assets/9c8d907b-d9d6-4cb9-bbaf-bbb2b15cde0d)
+   ![image](https://github.com/user-attachments/assets/6b6d31cf-0433-4b45-b8f3-df8d7ddc159c)
+4. Saat ditest menggunakan nc dari fairy
+   ![image](https://github.com/user-attachments/assets/ad12049b-d328-449e-b7eb-186a63e8c559)
+   ![image](https://github.com/user-attachments/assets/e0443cec-b0b1-4284-ac91-bae2aeccc5be)
+5. Saat ditest menggunakan nc dari ballettwins
+   ![image](https://github.com/user-attachments/assets/fabdc1e2-7753-428f-8408-dc04d6c884d6)
+   ![image](https://github.com/user-attachments/assets/5020c818-c48f-4b84-95c2-7f87592c310e)
+
+
+
+
+   
+
+
 
 
 
