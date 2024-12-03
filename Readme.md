@@ -534,7 +534,22 @@ service apache2 restart
 1. Sebelum Burnice terisolasi, kirim message “Kepercayaan adalah dasar dari jaringan yang aman. Jangan pernah mengkhianatinya.” dari Fairy ke Burnice
    ![image](https://github.com/user-attachments/assets/a9a1ff3f-7162-4541-8cf9-f1da0bf72a13)
    ![image](https://github.com/user-attachments/assets/b3a65c2e-db3f-4e4c-ba19-89ff8d782e07)
-2. Jalankan command berikut untuk memblokir 
+2. Coba ping burnice dari fairy
+    ![image](https://github.com/user-attachments/assets/ee89b3e5-a97f-4938-8705-8cbc1d7dbad8)
+3. Jalankan command berikut untuk memblokir semua lalu lintas yang masuk dan keluar dari burnice
+  ```
+   iptables --policy INPUT DROP
+   iptables --policy OUTPUT DROP
+   iptables --policy FORWARD DROP
+  ```
+4. Coba ping burnice kembali dari fairy, hasilnya ping tidak berhasil
+   ![image](https://github.com/user-attachments/assets/6eeaac90-b47b-4bce-affc-fe393bed1bbe)
+5. Ketika di nc juga pesan tidak muncul
+   ![image](https://github.com/user-attachments/assets/d5d6463e-1469-4184-87b5-c0604d4722ef)
+   ![image](https://github.com/user-attachments/assets/8a10c2e4-8c7a-4cb6-823d-1aa2e452eb43)
+
+
+
 
 
    
