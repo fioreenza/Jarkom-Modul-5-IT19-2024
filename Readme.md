@@ -497,6 +497,14 @@ service apache2 restart
 4. Ketika coba diping dan dicurl setelah melakukan nmap tidak bisa
    ![image](https://github.com/user-attachments/assets/3a1a9ddf-fc21-48d5-95b4-97e6a1602b7f)
 
+### NO 7
+1. Jalankan command berikut pada HollowZero
+   ```
+   iptables -A INPUT -p tcp --dport http -m conntrack --ctstate NEW -m recent --set
+   iptables -A INPUT -p tcp --dport http -m conntrack --ctstate NEW -m recent --update --seconds 1 --hitcount 3 -j REJECT
+   iptables -A INPUT -p tcp --dport http -j ACCEPT
+   ```
+2. 
 
 
 
