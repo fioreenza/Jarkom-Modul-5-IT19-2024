@@ -471,6 +471,38 @@ service apache2 restart
 6. Testing pada client selain faksi Victoria (Ellen & Lycaon) & PubSec (Jane & Policeboo)
    ![image](https://github.com/user-attachments/assets/7bfa90af-713a-46dd-b858-723fc3cc7dda)
 
+### NO 6
+1. Jalankan script ini pada HIA
+   ```
+    # Create a chain for handling port scanning
+    iptables -N PORTSCAN
+    
+    # Detect and handle new connections to ports 1-100
+    iptables -A INPUT -p tcp --dport 1:100 -m state --state NEW -m recent --set --name portscan
+    iptables -A INPUT -p tcp --dport 1:100 -m state --state NEW -m recent --update --seconds 10 --hitcount 25 --name portscan -j PORTSCAN
+    
+    # Log and block port-scanning IPs
+    iptables -A PORTSCAN -m recent --set --name blacklist
+    iptables -I PORTSCAN 1 -j LOG --log-prefix "PORT SCAN DETECTED: " --log-level 7
+    iptables -A PORTSCAN -j DROP
+    
+    # Block all further traffic from blacklisted IPs
+    iptables -A INPUT -m recent --name blacklist --rcheck -j DROP
+    iptables -A OUTPUT -m recent --name blacklist --rcheck -j DROP
+   ```
+2. Masih bisa diping dan dicurl di awal
+   ![image](https://github.com/user-attachments/assets/9ad15700-a5bc-493b-a0d6-9e7518d52979)
+3. Coba lakukan nmap
+   ![image](https://github.com/user-attachments/assets/19fa9af3-0f93-46c7-a9a7-dccd3d0714e1)
+4. Ketika coba diping dan dicurl setelah melakukan nmap tidak bisa
+   ![image](https://github.com/user-attachments/assets/3a1a9ddf-fc21-48d5-95b4-97e6a1602b7f)
+
+
+
+
+
+
+
 
 
    
