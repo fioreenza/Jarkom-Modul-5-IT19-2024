@@ -458,13 +458,17 @@ service apache2 restart
    ```
    ![image](https://github.com/user-attachments/assets/ef470762-3af3-4353-9d17-f14d3b593ebc)
 2. Testing pada client Ellen
+
    Bukan jam akses
    ![image](https://github.com/user-attachments/assets/7d1b6889-4999-41c0-8098-d5abf07a453d)
+
    Pada jam akses
    ![image](https://github.com/user-attachments/assets/b529d058-916b-4285-b07c-2a21a9b5bcb5)
 4. Testing pada client Jane
+
    Pada jam akses
    ![image](https://github.com/user-attachments/assets/e43af04d-a09d-4bdf-89db-b47c50b8adfe)
+
    Bukan jam akses
    ![image](https://github.com/user-attachments/assets/3b2ad575-f388-499c-8aec-2edf77f0bab9)
 6. Testing pada client selain faksi Victoria (Ellen & Lycaon) & PubSec (Jane & Policeboo)
