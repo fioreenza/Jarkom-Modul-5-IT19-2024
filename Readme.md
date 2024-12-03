@@ -309,14 +309,6 @@ post-up  route add -net 10.73.0.0 netmask 255.255.255.252 gw 10.73.2.1
 ## MISI 1
 
 ### NO 4
-Setup NewEridu
-```
-echo net.ipv4.ip_forward=1 >/etc/sysctl.conf
-sysctl -p
-
-ETH0_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
-iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
-```
 DHCP Relay (OuterRing, SixStreet, LuminaSquare, BalletTwins):
 ```
 apt-get update
@@ -437,6 +429,11 @@ service apache2 restart
 5. Saat ditest menggunakan nc dari ballettwins
    ![image](https://github.com/user-attachments/assets/fabdc1e2-7753-428f-8408-dc04d6c884d6)
    ![image](https://github.com/user-attachments/assets/5020c818-c48f-4b84-95c2-7f87592c310e)
+6. Hapus aturan menggunakan command
+   ```
+   iptables -L INPUT -n --line-numbers
+   iptables -D INPUT (nomor aturan)
+   ```
 
 
 ### NO 4
