@@ -443,6 +443,8 @@ service apache2 restart
    iptables -A INPUT -s 10.73.1.0/24 -m time --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
    iptables -A INPUT -j REJECT
    ```
+   ![image](https://github.com/user-attachments/assets/6a491404-3099-4150-bdf3-9a71621ccc44)
+
 2. Testing pada client Jane
    ![image](https://github.com/user-attachments/assets/75803136-03f1-4c7a-bc57-4777603b89a8)
 3. Testing pada client selain Burnice, Caesar, Jane, dan Policeboo
@@ -452,12 +454,23 @@ service apache2 restart
 1. Jalankan command ini pada webserver HIA
    ```
    iptables -A INPUT -s 10.73.0.128/25 -m time --timestart 08:00 --timestop 21:00 -j ACCEPT
-   iptables -A INPUT -s 10.72.0.1/24 -m time --timestart 03:00 --timestop 23:00 -j ACCEPT
+   iptables -A INPUT -s 10.73.1.0/24 -m time --timestart 03:00 --timestop 23:00 -j ACCEPT
    iptables -A INPUT -j REJECT
    ```
+   ![image](https://github.com/user-attachments/assets/ef470762-3af3-4353-9d17-f14d3b593ebc)
 2. Testing pada client Ellen
-3. Testing pada client Jane
-4. Testing pada client selain faksi Victoria (Ellen & Lycaon) & PubSec (Jane & Policeboo)
+   Bukan jam akses
+   ![image](https://github.com/user-attachments/assets/7d1b6889-4999-41c0-8098-d5abf07a453d)
+   Pada jam akses
+   ![image](https://github.com/user-attachments/assets/b529d058-916b-4285-b07c-2a21a9b5bcb5)
+4. Testing pada client Jane
+   Pada jam akses
+   ![image](https://github.com/user-attachments/assets/e43af04d-a09d-4bdf-89db-b47c50b8adfe)
+   Bukan jam akses
+   ![image](https://github.com/user-attachments/assets/3b2ad575-f388-499c-8aec-2edf77f0bab9)
+6. Testing pada client selain faksi Victoria (Ellen & Lycaon) & PubSec (Jane & Policeboo)
+   ![image](https://github.com/user-attachments/assets/7bfa90af-713a-46dd-b858-723fc3cc7dda)
+
 
 
    
