@@ -522,9 +522,9 @@ service apache2 restart
   ```
 2. Listen nc pada port 1234
    ![image](https://github.com/user-attachments/assets/7552c38d-7105-42d4-84b2-3b327cb9ea35)
-3. Kirim pesan ke ip burnice melalui port 1234
+4. Kirim pesan ke ip burnice melalui port 1234
    ![image](https://github.com/user-attachments/assets/ee1b9bb0-267d-4891-81cd-92fd067f37cf)
-4. Pesan akan diterima oleh Hollowzero
+5. Pesan akan diterima oleh Hollowzero
    ![image](https://github.com/user-attachments/assets/44131128-d80b-4eb8-8ca0-b69c460ecdb2)
 
 
