@@ -309,6 +309,14 @@ post-up  route add -net 10.73.0.0 netmask 255.255.255.252 gw 10.73.2.1
 ## MISI 1
 
 ### NO 4
+Setup NewEridu
+```
+echo net.ipv4.ip_forward=1 >/etc/sysctl.conf
+sysctl -p
+
+ETH0_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
+```
 DHCP Relay (OuterRing, SixStreet, LuminaSquare, BalletTwins):
 ```
 apt-get update
@@ -414,7 +422,7 @@ service apache2 restart
 
 
 ### NO 3 
-1. Jalankan script pada DHCP server HDD agar hanya Fairy yang dapat mengakses HDD
+1. Jalankan command ini pada DHCP server HDD agar hanya Fairy yang dapat mengakses HDD
    ```
    iptables -A INPUT -s 10.73.2.11 -j ACCEPT
    iptables -A INPUT -j DROP
@@ -429,6 +437,33 @@ service apache2 restart
 5. Saat ditest menggunakan nc dari ballettwins
    ![image](https://github.com/user-attachments/assets/fabdc1e2-7753-428f-8408-dc04d6c884d6)
    ![image](https://github.com/user-attachments/assets/5020c818-c48f-4b84-95c2-7f87592c310e)
+
+
+### NO 4
+1. Jalankan command ini pada webserver HollowZero
+   ```
+   iptables -A INPUT -s 10.73.2.64/26 -m time --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+   iptables -A INPUT -s 10.73.1.0/24 -m time --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+   iptables -A INPUT -j REJECT
+   ```
+2. Testing pada client Jane
+   ![image](https://github.com/user-attachments/assets/75803136-03f1-4c7a-bc57-4777603b89a8)
+3. Testing pada client selain Burnice, Caesar, Jane, dan Policeboo
+   ![image](https://github.com/user-attachments/assets/483b4838-177b-4955-ba89-60cc9cfda36f)
+
+### NO 5
+1. Jalankan command ini pada webserver HIA
+   ```
+   iptables -A INPUT -s 10.73.0.128/25 -m time --timestart 08:00 --timestop 21:00 -j ACCEPT
+   iptables -A INPUT -s 10.72.0.1/24 -m time --timestart 03:00 --timestop 23:00 -j ACCEPT
+   iptables -A INPUT -j REJECT
+   ```
+2. Testing pada client Ellen
+3. Testing pada client Jane
+4. Testing pada client selain faksi Victoria (Ellen & Lycaon) & PubSec (Jane & Policeboo)
+
+
+   
 
 
 
