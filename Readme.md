@@ -517,9 +517,27 @@ service apache2 restart
 ### NO 8
 1. Jalankan script berikut di Burnice agar paket yang diterima ke burnice akan dialihkan ke HollowZero.
   ```
-   iptables -t nat -A PREROUTING -p tcp -j DNAT --to-destination 10.73.2.130
-   iptables -A FORWARD -p tcp -d 10.73.2.130 -j ACCEPT
+  iptables -t nat -A PREROUTING -p tcp --dport 1234 -s 10.73.2.11 -d 10.73.2.69 -j DNAT --to-destination 10.73.2.130:1234
+  iptables -t nat -A POSTROUTING -p tcp --dport 1234 -d 10.73.2.130 -j MASQUERADE
   ```
+2. Listen nc pada port 1234
+   ![image](https://github.com/user-attachments/assets/7552c38d-7105-42d4-84b2-3b327cb9ea35)
+3. Kirim pesan ke ip burnice melalui port 1234
+   ![image](https://github.com/user-attachments/assets/ee1b9bb0-267d-4891-81cd-92fd067f37cf)
+4. Pesan akan diterima oleh Hollowzero
+   ![image](https://github.com/user-attachments/assets/44131128-d80b-4eb8-8ca0-b69c460ecdb2)
+
+
+## MISI 3
+
+### NO 1
+1. Sebelum Burnice terisolasi, kirim message “Kepercayaan adalah dasar dari jaringan yang aman. Jangan pernah mengkhianatinya.” dari Fairy ke Burnice
+   ![image](https://github.com/user-attachments/assets/a9a1ff3f-7162-4541-8cf9-f1da0bf72a13)
+   ![image](https://github.com/user-attachments/assets/b3a65c2e-db3f-4e4c-ba19-89ff8d782e07)
+2. Jalankan command berikut untuk memblokir 
+
+
+   
 
 
 
