@@ -521,12 +521,13 @@ service apache2 restart
   iptables -t nat -A POSTROUTING -p tcp --dport 1234 -d 10.73.2.130 -j MASQUERADE
   ```
 2. Listen nc pada port 1234
-   ![image](https://github.com/user-attachments/assets/7552c38d-7105-42d4-84b2-3b327cb9ea35)
+   ![image](https://github.com/user-attachments/assets/3909c412-47c8-44bd-937b-f58a314e904a)
 4. Kirim pesan ke ip burnice melalui port 1234
    ![image](https://github.com/user-attachments/assets/ee1b9bb0-267d-4891-81cd-92fd067f37cf)
 5. Pesan akan diterima oleh Hollowzero
-   ![image](https://github.com/user-attachments/assets/44131128-d80b-4eb8-8ca0-b69c460ecdb2)
+   ![image](https://github.com/user-attachments/assets/ada9a740-0d06-4e50-abcf-b4a6fa11eb51)
 
+   
 
 ## MISI 3
 
