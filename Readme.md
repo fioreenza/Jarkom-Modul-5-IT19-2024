@@ -499,7 +499,6 @@ service apache2 restart
 ### NO 7
 1. Jalankan command berikut pada HollowZero
    ```
-   iptables -N HOLLOWZERO_LIMIT
    iptables -A INPUT -p tcp --dport 80 -m conntrack --ctstate NEW -m recent --set --name HollowZero
    iptables -A INPUT -p tcp --dport 80 -m conntrack --ctstate NEW -m recent --rcheck --seconds 60 --hitcount 3 --name HollowZero -j REJECT
    iptables -A INPUT -p tcp --dport 80 -j ACCEPT
@@ -514,6 +513,14 @@ service apache2 restart
    parallel curl -s 10.73.2.130 ::: 10.73.2.68 10.73.2.67 10.73.1.3 10.73.1.2
    ```
    ![image](https://github.com/user-attachments/assets/b26cd45a-3ad2-427f-b3a1-6cd60f9e0703)
+
+### NO 8
+1. Jalankan script berikut di Burnice agar paket yang diterima ke burnice akan dialihkan ke HollowZero.
+  ```
+   iptables -t nat -A PREROUTING -p tcp -j DNAT --to-destination 10.73.2.130
+   iptables -A FORWARD -p tcp -d 10.73.2.130 -j ACCEPT
+  ```
+
 
 
 
