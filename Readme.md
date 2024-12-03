@@ -435,7 +435,6 @@ service apache2 restart
    iptables -D INPUT (nomor aturan)
    ```
 
-
 ### NO 4
 1. Jalankan command ini pada webserver HollowZero
    ```
@@ -500,11 +499,23 @@ service apache2 restart
 ### NO 7
 1. Jalankan command berikut pada HollowZero
    ```
-   iptables -A INPUT -p tcp --dport http -m conntrack --ctstate NEW -m recent --set
-   iptables -A INPUT -p tcp --dport http -m conntrack --ctstate NEW -m recent --update --seconds 1 --hitcount 3 -j REJECT
-   iptables -A INPUT -p tcp --dport http -j ACCEPT
+   iptables -N HOLLOWZERO_LIMIT
+   iptables -A INPUT -p tcp --dport 80 -m conntrack --ctstate NEW -m recent --set --name HollowZero
+   iptables -A INPUT -p tcp --dport 80 -m conntrack --ctstate NEW -m recent --rcheck --seconds 60 --hitcount 3 --name HollowZero -j REJECT
+   iptables -A INPUT -p tcp --dport 80 -j ACCEPT
    ```
-2. 
+2. Install parallel
+   ```
+   apt update
+   apt install parallel -y
+   ```
+3. Jalankan command ini untuk curl di Burnice, Caeser, Jane dan Policeboo secara bersamaan
+   ```
+   parallel curl -s 10.73.2.130 ::: 10.73.2.68 10.73.2.67 10.73.1.3 10.73.1.2
+   ```
+   ![image](https://github.com/user-attachments/assets/b26cd45a-3ad2-427f-b3a1-6cd60f9e0703)
+
+
 
 
 
